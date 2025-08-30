@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroGuru API Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: inline-block;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .docs-container {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .endpoint {
+            margin-bottom: 2rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .endpoint-header {
+            padding: 1rem;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .method {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.875rem;
+            margin-right: 1rem;
+        }
+
+        .method.post { background: #28a745; color: white; }
+        .method.get { background: #007bff; color: white; }
+
+        .endpoint-path {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 1.1rem;
+        }
+
+        .endpoint-body {
+            padding: 1.5rem;
+        }
+
+        .section {
+            margin-bottom: 1.5rem;
+        }
+
+        .section h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 1rem;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        .response-example {
+            background: #e8f5e8;
+            border-left: 4px solid #28a745;
+        }
+
+        .auth-required {
+            color: #dc3545;
+            font-size: 0.875rem;
+            font-weight: bold;
+        }
+
+        .base-url {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .toc h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .toc a:hover {
+            color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .docs-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AstroGuru API Documentation</h1>
+            <p>Complete API reference for the horoscope service</p>
+            <a href="/" class="nav-link">← Back to App</a>
+        </div>
+
+        <div class="docs-container">
+            <div class="base-url">
+                <h3>Base URL</h3>
+                <code>https://astro-guru-1.netlify.app/.netlify/functions</code>
+            </div>
+
+            <div class="toc">
+                <h3>Table of Contents</h3>
+                <ul>
+                    <li><a href="#auth">Authentication</a></li>
+                    <li><a href="#horoscope">Horoscope</a></li>
+                    <li><a href="#examples">Complete Examples</a></li>
+                </ul>
+            </div>
+
+            <h2 id="auth">Authentication</h2>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method post">POST</span>
+                    <span class="endpoint-path">/auth-signup</span>
+                </div>
+                <div class="endpoint-body">
+                    <div class="section">
+                        <h4>Description</h4>
+                        <p>Register a new user with automatic zodiac sign detection</p>
+                    </div>
+                    
+                    <div class="section">
+                        <h4>Request Body</h4>
+                        <div class="code-block">{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "MyPassword123",
+  "birthdate": "1990-06-15"
+}</div>
+                    </div>
+
+                    <div class="section">
+                        <h4>Example Request</h4>
+                        <div class="code-block">curl -X POST https://astro-guru-1.netlify.app/.netlify/functions/auth-signup \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "MyPassword123",
+    "birthdate": "1990-06-15"
+  }'</div>
+                    </div>
+
+                    <div class="section">
+                        <h4>Response Example</h4>
+                        <div class="code-block response-example">{
+  "success": true,
+  "message": "User created successfully",
+  "data": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "user": {
+      "id": "...",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "birthdate": "1990-06-15T00:00:00.000Z",
+      "zodiacSign": "gemini"
+    }
+  }
+}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method post">POST</span>
+                    <span class="endpoint-path">/auth-login</span>
+                </div>
+                <div class="endpoint-body">
+                    <div class="section">
+                        <h4>Description</h4>
+                        <p>Login with email and password</p>
+                    </div>
+                    
+                    <div class="section">
+                        <h4>Request Body</h4>
+                        <div class="code-block">{
+  "email": "john@example.com",
+  "password": "MyPassword123"
+}</div>
+                    </div>
+
+                    <div class="section">
+                        <h4>Example Request</h4>
+                        <div class="code-block">curl -X POST https://astro-guru-1.netlify.app/.netlify/functions/auth-login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "john@example.com",
+    "password": "MyPassword123"
+  }'</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-path">/auth-profile</span>
+                    <span class="auth-required">🔒 Auth Required</span>
+                </div>
+                <div class="endpoint-body">
+                    <div class="section">
+                        <h4>Description</h4>
+                        <p>Get current user profile information</p>
+                    </div>
+                    
+                    <div class="section">
+                        <h4>Headers</h4>
+                        <div class="code-block">Authorization: Bearer YOUR_JWT_TOKEN</div>
+                    </div>
+
+                    <div class="section">
+                        <h4>Example Request</h4>
+                        <div class="code-block">curl -X GET https://astro-guru-1.netlify.app/.netlify/functions/auth-profile \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"</div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 id="horoscope">Horoscope</h2>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-path">/horoscope-today</span>
+                    <span class="auth-required">🔒 Auth Required</span>
+                </div>
+                <div class="endpoint-body">
+                    <div class="section">
+                        <h4>Description</h4>
+                        <p>Get today's horoscope for the authenticated user</p>
+                    </div>
+                    
+                    <div class="section">
+                        <h4>Example Request</h4>
+                        <div class="code-block">curl -X GET https://astro-guru-1.netlify.app/.netlify/functions/horoscope-today \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"</div>
+                    </div>
+
+                    <div class="section">
+                        <h4>Response Example</h4>
+                        <div class="code-block response-example">{
+  "success": true,
+  "data": {
+    "horoscope": {
+      "id": "...",
+      "date": "2025-08-30T00:00:00.000Z",
+      "content": "Today brings fiery energy your way! Your natural leadership qualities will shine...",
+      "zodiacSign": "gemini",
+      "zodiacInfo": {
+        "element": "Air",
+        "planet": "Mercury",
+        "symbol": "♊",
+        "dates": "May 21 - June 20"
+      }
+    }
+  }
+}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-path">/horoscope-history</span>
+                    <span class="auth-required">🔒 Auth Required</span>
+                </div>
+                <div class="endpoint-body">
+                    <div class="section">
+                        <h4>Description</h4>
+                        <p>Get the last 7 days of horoscope history</p>
+                    </div>
+                    
+                    <div class="section">
+                        <h4>Example Request</h4>
+                        <div class="code-block">curl -X GET https://astro-guru-1.netlify.app/.netlify/functions/horoscope-history \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"</div>
+                    </div>
+
+                    <div class="section">
+                        <h4>Response Example</h4>
+                        <div class="code-block response-example">{
+  "success": true,
+  "data": {
+    "horoscopes": [
+      {
+        "id": "...",
+        "date": "2025-08-30T00:00:00.000Z",
+        "content": "Today brings fiery energy your way!",
+        "zodiacSign": "gemini"
+      },
+      // ... more horoscopes
+    ],
+    "zodiacInfo": { ... },
+    "totalCount": 7
+  }
+}</div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 id="examples">Complete Workflow Examples</h2>
+
+            <div class="section">
+                <h3>1. Register and Get Today's Horoscope</h3>
+                <div class="code-block"># Step 1: Register
+RESPONSE=$(curl -s -X POST https://astro-guru-1.netlify.app/.netlify/functions/auth-signup \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "password": "SecurePass123",
+    "birthdate": "1992-12-03"
+  }')
+
+# Step 2: Extract token
+TOKEN=$(echo $RESPONSE | grep -o '"token":"[^"]*"' | cut -d'"' -f4)
+
+# Step 3: Get today's horoscope
+curl -X GET https://astro-guru-1.netlify.app/.netlify/functions/horoscope-today \
+  -H "Authorization: Bearer $TOKEN"</div>
+            </div>
+
+            <div class="section">
+                <h3>Password Requirements</h3>
+                <ul>
+                    <li>Minimum 6 characters</li>
+                    <li>At least one uppercase letter</li>
+                    <li>At least one lowercase letter</li>
+                    <li>At least one number</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3>Error Responses</h3>
+                <p>All endpoints return errors in this format:</p>
+                <div class="code-block">{
+  "success": false,
+  "message": "Error description",
+  "errors": [ /* validation errors if applicable */ ]
+}</div>
+            </div>
+
+            <div class="section">
+                <h3>Rate Limiting</h3>
+                <p>API endpoints are rate limited to prevent abuse:</p>
+                <ul>
+                    <li><strong>Auth endpoints:</strong> 10 requests per 15 minutes</li>
+                    <li><strong>Horoscope endpoints:</strong> 5 requests per minute</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
