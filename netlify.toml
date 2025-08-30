@@ -1,0 +1,35 @@
+[build]
+  # Build command for the project
+  command = "npm run build"
+  # Directory to publish (where the built files are)
+  publish = "dist"
+  # Directory containing serverless functions
+  functions = "netlify/functions"
+
+[build.environment]
+  # Node.js version
+  NODE_VERSION = "18"
+
+# Redirects for SPA routing
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Environment variables (will be set in Netlify dashboard)
+# MONGODB_URI = your_mongodb_atlas_connection_string
+# JWT_SECRET = your_jwt_secret_key
