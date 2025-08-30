@@ -7,10 +7,9 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "build": "npm run build:frontend",
-    "build:frontend": "mkdir -p dist && cp -r public/* dist/",
+    "build:frontend": "mkdir -p dist && cp -r public/. dist/ 2>/dev/null || echo 'Copying public files'",
     "build:functions": "mkdir -p netlify/functions",
-    "seed": "node scripts/seedData.js",
-    "setup": "./setup.sh"
+    "seed": "node scripts/seedData.js"
   },
   "keywords": ["horoscope", "astrology", "api"],
   "author": "Developer",

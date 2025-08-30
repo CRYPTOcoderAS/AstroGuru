@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroGuru - Horoscope App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <h1>AstroGuru</h1>
+                <p>Daily Horoscopes</p>
+            </div>
+            <nav class="nav" id="navigation" style="display: none;">
+                <button id="todayBtn" class="nav-btn active">Today</button>
+                <button id="historyBtn" class="nav-btn">History</button>
+                <button id="profileBtn" class="nav-btn">Profile</button>
+                <button id="logoutBtn" class="nav-btn logout">Logout</button>
+            </nav>
+        </header>
+
+        <main class="main">
+            <div id="authSection" class="auth-section">
+                <div class="auth-container">
+                    <div class="auth-tabs">
+                        <button id="loginTab" class="tab-btn active">Login</button>
+                        <button id="signupTab" class="tab-btn">Sign Up</button>
+                    </div>
+
+                    <form id="loginForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="loginEmail">Email</label>
+                            <input type="email" id="loginEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+
+                    <form id="signupForm" class="auth-form" style="display: none;">
+                        <div class="form-group">
+                            <label for="signupName">Full Name</label>
+                            <input type="text" id="signupName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupEmail">Email</label>
+                            <input type="email" id="signupEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword">Password</label>
+                            <div class="password-container">
+                                <input type="password" id="signupPassword" required placeholder="e.g., MyPassword123">
+                                <button type="button" id="togglePassword" class="password-toggle">👁️</button>
+                            </div>
+                            <div id="passwordRequirements" class="password-requirements">
+                                <div id="lengthReq" class="requirement">✗ At least 6 characters</div>
+                                <div id="uppercaseReq" class="requirement">✗ One uppercase letter</div>
+                                <div id="lowercaseReq" class="requirement">✗ One lowercase letter</div>
+                                <div id="numberReq" class="requirement">✗ One number</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupBirthdate">Date of Birth</label>
+                            <input type="date" id="signupBirthdate" required max="" min="">
+                            <small>You must be at least 13 years old</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="appSection" class="app-section" style="display: none;">
+                <div id="todaySection" class="content-section">
+                    <div class="horoscope-card">
+                        <div class="card-header">
+                            <h2>Today's Horoscope</h2>
+                            <div id="zodiacInfo" class="zodiac-info"></div>
+                        </div>
+                        <div id="todayHoroscope" class="horoscope-content">
+                            <div class="loading">Loading your horoscope...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="historySection" class="content-section" style="display: none;">
+                    <div class="horoscope-card">
+                        <div class="card-header">
+                            <h2>7-Day Horoscope History</h2>
+                        </div>
+                        <div id="historyHoroscopes" class="history-content">
+                            <div class="loading">Loading your history...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="profileSection" class="content-section" style="display: none;">
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <h2>Your Profile</h2>
+                        </div>
+                        <div id="profileContent" class="profile-content">
+                            <div class="loading">Loading profile...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div id="errorMessage" class="error-message" style="display: none;"></div>
+        <div id="successMessage" class="success-message" style="display: none;"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
